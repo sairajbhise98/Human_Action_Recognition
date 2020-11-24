@@ -1,2 +1,2 @@
-# Human_Activity_Recognition
+# Human_Action_Recognition
 Final Project 
