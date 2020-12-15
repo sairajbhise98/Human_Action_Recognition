@@ -1,1 +1,0 @@
-All the templates i.e html files will be here

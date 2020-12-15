@@ -1,5 +1,0 @@
-All the deployment work will be done in this folder only to keep it sorted
-
-1) Name the files accordingly (Step by Step)
-2) Members must commit the files of files they using after there work (Compulsory)
-3) Dont change the names 
