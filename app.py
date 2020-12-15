@@ -20,6 +20,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET','POST'])
 def index():
+	answer = ''
 	if request.method == 'POST' :
 
 		# Taking the link of the video from the form
