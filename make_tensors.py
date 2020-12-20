@@ -4,6 +4,7 @@ import os
 import shutil
 import math
 import datetime
+from keras.models import load_model
 # plots
 import matplotlib.pyplot as plt
 from utils import Videos
@@ -40,6 +41,19 @@ class Return_Tensor(object) :
     v = Videos()
     tensors = v.read_videos([video])
 
-    return tensors
+    #loading model
+    model=load_model('final_model.h5')
+
+    #making prediction
+    pred=model.predict_classes(tensors)
+
+    #loading our target dataset
+    df=pd.read_csv('dataframe.csv')
+
+    #checking relative activity name to the array
+    activity_name=df[df['label_nums']==pred[0]]
+    activity=activity_name.labels.unique()[0]
+
+    return activity
 
 

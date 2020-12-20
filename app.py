@@ -4,8 +4,9 @@ from flask import Flask ,render_template,request,url_for
 import json
 import os
 from make_tensors import Return_Tensor
-from keras.models import load_model
+
 import pandas as pd
+
 
 # using the config.json for predefined paths
 #with open('config.json','r') as c :
@@ -20,6 +21,9 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET','POST'])
 def index():
+
+	activity=''
+
 	if request.method == 'POST' :
 
 		# Taking the link of the video from the form
@@ -29,20 +33,20 @@ def index():
 
 		# taking tensors 
 		rt = Return_Tensor()
-		tensors = rt.give_me_tensor(link)
+		activity = rt.give_me_tensor(link)
 
 		# loading model
-		model = load_model('final_model.h5')
+		#model = load_model('final_model.h5')
 
 		# Making predictions
-		pred = model.predict_classes(tensors)
+		#pred = model.predict_classes(tensors)
 
 		#loadinng our target dataset
-		df = pd.read_csv('dataframe.csv')
+		#df = pd.read_csv('dataframe.csv')
 
 		# Checking relative activity name to the array
-		activity_name = df[df['label_nums']==pred[0]]
-		answer = activity_name.labels.unique()[0]
+		#activity_name = df[df['label_nums']==pred[0]]
+		#activity= activity_name.labels.unique()[0]
 
 
 
@@ -64,7 +68,7 @@ def index():
 		# Saving video to upload folder
 		#a.save(os.path.join(app.config['UPLOAD_FOLDER'],a.filename))
 
-	return render_template('index.html',answer=answer)
+	return render_template('index.html',answer=activity)
 
 if __name__=='__main__':
 	app.run(debug=True)
